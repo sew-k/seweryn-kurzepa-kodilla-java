@@ -21,6 +21,7 @@ public interface ArrayOperations {
                 .forEach(System.out::println);
 
         OptionalDouble result = IntStream.range(0, numbersList.size())
+                .mapToDouble(n -> numbersList.get(n))
                 .average();
 
         return result.getAsDouble();
