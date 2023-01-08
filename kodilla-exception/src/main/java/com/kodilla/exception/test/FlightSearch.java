@@ -24,7 +24,7 @@ public class FlightSearch {
 
     public static void main(String[] args) {
         Flight flight = new Flight("Warsaw", "Cologne");
-
+        System.out.println("before");
         try {
             boolean airportAvailable = FlightSearch.findFlight(flight);
             if (airportAvailable) {
@@ -37,5 +37,6 @@ public class FlightSearch {
         } finally {
             System.out.println("End of program");
         }
+        System.out.println("after finally");
     }
 }
