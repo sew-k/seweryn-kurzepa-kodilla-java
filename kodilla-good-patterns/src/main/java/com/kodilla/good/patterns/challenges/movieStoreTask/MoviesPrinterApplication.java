@@ -1,4 +1,4 @@
-package com.kodilla.good.patterns.challenges;
+package com.kodilla.good.patterns.challenges.movieStoreTask;
 
 public class MoviesPrinterApplication {
     public static void main(String[] args) {
