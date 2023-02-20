@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
+    private final String listName;
     private List<String> tasks;
 
-    public TaskList() {
+    public TaskList(String listName) {
+        this.listName = listName;
         this.tasks = new ArrayList<>();
     }
     public void addTask(String task) {
@@ -20,7 +22,8 @@ public class TaskList {
     @Override
     public String toString() {
         return "TaskList{" +
-                "tasks=" + tasks +
+                "listName='" + listName + '\'' +
+                ", tasks=" + tasks +
                 '}';
     }
 }

@@ -34,7 +34,16 @@ public class Board {
     public void setDoneList(TaskList doneList) {
         this.doneList = doneList;
     }
-    public void addTaskToList(TaskList taskList, String task) {
-        taskList.addTask(task);
+    //public void addTaskToList(TaskList taskList, String task) {
+    //    taskList.addTask(task);
+    //}
+
+    @Override
+    public String toString() {
+        return "Board{" +
+                "toDoList=" + toDoList +
+                ", inProgressList=" + inProgressList +
+                ", doneList=" + doneList +
+                '}';
     }
 }
