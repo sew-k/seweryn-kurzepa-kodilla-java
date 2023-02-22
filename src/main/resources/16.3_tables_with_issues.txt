@@ -1,0 +1,69 @@
+CREATE TABLE ISSUESLIST
+(
+	ID	SERIAL		PRIMARY KEY,
+	NAME	VARCHAR(50)
+);
+
+CREATE TABLE ISSUES
+(
+	ID			SERIAL	PRIMARY KEY,
+	ISSUESLIST_ID 		BIGINT 	UNSIGNED NOT NULL,
+	SUMMARY			VARCHAR(50) NOT NULL,
+	DESCRIPTION		VARCHAR(1024),
+	USER_ID_ASSIGNEDTO	BIGINT	UNSIGNED NOT NULL,
+	
+	FOREIGN KEY (USER_ID_ASSIGNEDTO) REFERENCES USERS(ID),
+	FOREIGN KEY (ISSUESLIST_ID) REFERENCES ISSUESLIST(ID)
+);
+
+INSERT INTO ISSUESLIST (NAME) VALUES ("ToDo");
+
+INSERT INTO ISSUESLIST (NAME) VALUES ("In progress");
+
+INSERT INTO ISSUESLIST (NAME) VALUES ("Done");
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES (1, "First issue to do", "This is first issue that has to be done by John S.", 1);
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES (1, "Second issue to do", "This is second issue that has to be done by John S.", 1);
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES (1, "Third issue to do", "This is third issue that has to be done by Zachary", 2);
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES (1, "Fourth issue to do", "This is fourth issue that has to be done by John T.", 5);
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES (1, "Fifth issue to do", "This is fifth issue for Thomas", 4);
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES (2, "First issue in progress", "First issue in progress that John S. is working on", 1);
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES (2, "Second issue in progress", "Just an issue in progress (John S.)", 1);
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES (2, "Third issue in progress", "Special issue in progress for Stephanie", 3);
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES (2, "Fourth issue in progress", "Normal issue - job for John T. in progress", 5);
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES (2, "Fifth issue in progress", "Thomas is now doing this issue", 4);
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES (3, "First issue done", "This is an issue completed by John S.", 1);
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES (3, "Second issue done", "This is second issue done by John S.", 1);
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES (3, "Third issue done", "Good job - done by Zachary", 2);
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES (3, "Fourth issue done", "Issue completed by John T.", 5);
+
+INSERT INTO ISSUES (ISSUESLIST_ID, SUMMARY, DESCRIPTION, USER_ID_ASSIGNEDTO)
+VALUES (3, "Fifth issue done", "This is an issue done by Zahary", 2);
+
