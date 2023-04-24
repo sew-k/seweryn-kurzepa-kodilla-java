@@ -6,11 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@NamedNativeQuery(
-    name = "Company.retrieveCompaniesWithThreeFirstCharsInName",
-    query = "select * from COMPANIES where substring(COMPANY_NAME from 1 for 3) = :THREEFIRSTCHARS",
-    resultClass = Company.class
-)
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name = "Company.retrieveCompaniesWithThreeFirstCharsInName",
+                query = "select * from COMPANIES where substring(COMPANY_NAME from 1 for 3) = :THREEFIRSTCHARS",
+                resultClass = Company.class
+        ),
+        @NamedNativeQuery(
+                name = "Company.retrieveCompaniesNameLike",
+                query = "select * from COMPANIES where COMPANY_NAME like :TEXT",
+                resultClass = Company.class
+        )
+})
+
 @Entity
 @Table(name = "COMPANIES")
 public class Company {

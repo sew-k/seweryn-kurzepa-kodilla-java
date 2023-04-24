@@ -6,10 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@NamedQuery(
-    name = "Employee.retrieveEmployeeByLastname",
-    query = "from Employee where lastname = :LASTNAME"
-)
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name = "Employee.retrieveEmployeeByLastname",
+                query = "SELECT * from EMPLOYEES where LASTNAME = :LASTNAME",
+                resultClass = Employee.class
+        ),
+        @NamedNativeQuery(
+                name = "Employee.retrieveEmployeesNameLike",
+                query = "SELECT * from EMPLOYEES where LASTNAME like :TEXT or FIRSTNAME like :TEXT",
+                resultClass = Employee.class
+        ),
+})
 @Entity
 @Table(name = "EMPLOYEES")
 public class Employee {
