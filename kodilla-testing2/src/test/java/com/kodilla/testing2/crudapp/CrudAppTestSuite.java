@@ -7,8 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -27,7 +30,7 @@ public class CrudAppTestSuite {
 
     @AfterEach
     public void cleanUpAfterTest() {
-//        driver.close();
+        driver.close();
     }
 
     private String createCrudAppTestTask() throws InterruptedException {
@@ -48,6 +51,26 @@ public class CrudAppTestSuite {
         Thread.sleep(2000);
 
         return taskName;
+    }
+    private void deleteTestTaskInCrudApp(String taskName) throws InterruptedException {
+        driver.switchTo().alert().accept();
+        driver.switchTo().defaultContent();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4L));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"datatable__tasks-container\"]")));
+        driver.findElements(
+                        By.xpath("//form[@class=\"datatable__row\"]")).stream()
+                .filter(anyForm ->
+                        anyForm.findElement(By.xpath(".//p[@class=\"datatable__field-value\"]"))
+                                .getText().equals(taskName))
+                .forEach(theForm -> {
+
+                    WebElement buttonDeleteCard =
+                            theForm.findElement(By.xpath(".//button[4]"));
+
+                    buttonDeleteCard.click();
+                });
+        Thread.sleep(5000);
     }
 
     private void sendTestTaskToTrello(String taskName) throws InterruptedException {
@@ -106,11 +129,13 @@ public class CrudAppTestSuite {
         return result;
     }
 
-
     @Test
     public void shouldCreateTrelloCard() throws InterruptedException {
         String taskName = createCrudAppTestTask();
         sendTestTaskToTrello(taskName);
         assertTrue(checkTaskExistsInTrello(taskName));
+
+        //CRUD App Clean Up
+        deleteTestTaskInCrudApp(taskName);
     }
 }
