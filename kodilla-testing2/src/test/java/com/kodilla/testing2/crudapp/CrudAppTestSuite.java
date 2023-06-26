@@ -27,7 +27,7 @@ public class CrudAppTestSuite {
 
     @AfterEach
     public void cleanUpAfterTest() {
-        driver.close();
+//        driver.close();
     }
 
     private String createCrudAppTestTask() throws InterruptedException {
@@ -79,7 +79,8 @@ public class CrudAppTestSuite {
         driverTrello.get(TRELLO_URL);
 
         driverTrello.findElement(By.id("user")).sendKeys("sew_k@wp.pl");
-        driverTrello.findElement(By.id("password")).sendKeys("SewTrello!@123");
+        Thread.sleep(4000);
+
         WebElement el = driverTrello.findElement(By.id("login"));
         el.submit();
 
@@ -95,7 +96,8 @@ public class CrudAppTestSuite {
                 .forEach(WebElement::click);
 
         Thread.sleep(4000);
-
+        driverTrello.navigate().refresh();
+        Thread.sleep(4000);
         result = driverTrello.findElements(By.xpath("//span")).stream()
                 .anyMatch(theSpan -> theSpan.getText().equals(taskName));
 
